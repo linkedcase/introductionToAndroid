@@ -1,42 +1,35 @@
 package ru.netology.nmedia
 
 import android.os.Bundle
-import androidx.annotation.DrawableRes
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import ru.netology.nmedia.ViewModel.PostViewModel
 import ru.netology.nmedia.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class MainActivity : AppCompatActivity() {
+
+    private val viewModel by viewModels<PostViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.render(post)
-
-        binding.root.setOnClickListener{
-            binding.root
-        }
-
-        binding.avatar.setOnClickListener {
-            binding.avatar
+        viewModel.data.observe(this) { post ->
+            binding.render(post)
         }
 
         binding.likes.setOnClickListener {
-            post.likedByMe = !post.likedByMe
-            if (post.likedByMe) post.likes++ else post.likes--
-            binding.likes.setImageResource(getLikeIconResId(post.likedByMe))
-            binding.sumLikes.text = printQuantity(post.likes)
+            viewModel.onLikeClicKed()
         }
 
-        binding.share.setOnClickListener{
-            post.share++
-            binding.sumShare.text = printQuantity(post.share)
+        binding.share.setOnClickListener {
+            viewModel.isShared()
         }
 
-        binding.views.setOnClickListener{
-            post.views++
-            binding.sumViews.text = printQuantity(post.views)
+        binding.views.setOnClickListener {
+            viewModel.isViewed()
         }
     }
 }
