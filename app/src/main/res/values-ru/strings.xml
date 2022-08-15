@@ -9,4 +9,8 @@
     <string name="sum_likes">10</string>
     <string name="sum_share">5</string>
     <string name="sum_views">5</string>
+    <string name="remove">Удалить</string>
+    <string name="post_text">Создать новый пост</string>
+    <string name="menu_edit">Изменить</string>
+    <string name="edit_cancel">Отменить редактирование</string>
 </resources>
