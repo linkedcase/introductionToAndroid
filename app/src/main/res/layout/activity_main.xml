@@ -56,7 +56,6 @@
         android:background="@android:color/transparent"
         android:contentDescription="@string/edit_cancel"
         android:src="@drawable/ic_baseline_highlight_off_48dp"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/saveButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/contentEditText" />

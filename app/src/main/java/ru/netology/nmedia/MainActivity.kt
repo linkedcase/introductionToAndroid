@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import ru.netology.nmedia.viewModel.PostViewModel
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
@@ -36,11 +35,20 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(posts)
         }
 
+        binding.editCancel.setOnClickListener {
+            val editedText = viewModel.onEditCancelClicked()
+            binding.contentEditText.setText(editedText)
+        }
+
         viewModel.currentPost.observe(this) { currentPost ->
             with(binding.contentEditText) {
                 val textPost = currentPost?.textPost
                 setText(textPost)
-                if (textPost != null) requestFocus()
+                binding.group.visibility = View.GONE
+                if (textPost != null) {
+                    requestFocus()
+                    binding.group.visibility = View.VISIBLE
+                }
             }
         }
     }
