@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.PostListItemBinding
-import ru.netology.nmedia.databinding.PostListItemBinding.inflate
-import ru.netology.nmedia.impl.getLikeIconResId
 import ru.netology.nmedia.impl.printQuantity
 
 class PostsAdapter(
@@ -78,12 +76,12 @@ class PostsAdapter(
                 author.text = post.authorPost
                 date.text = post.datePost
                 content.text = post.textPost
-                sumLikes.text = printQuantity(post.likes)
-                sumShare.text = printQuantity(post.share)
-                sumViews.text = printQuantity(post.views)
-                likes.setImageResource(getLikeIconResId(post.likedByMe))
-                share.setImageResource(R.drawable.ic_share_24dp)
-                views.setImageResource(R.drawable.ic_eye_24dp)
+                share.text = printQuantity(post.share)
+                views.text = printQuantity(post.views)
+                likes.text = printQuantity(post.likes)
+                likes.isChecked = post.likedByMe
+                share.setIconResource(R.drawable.ic_share_24dp)
+                views.setIconResource(R.drawable.ic_eye_24dp)
                 options.setOnClickListener { popupMenu.show() }
             }
         }

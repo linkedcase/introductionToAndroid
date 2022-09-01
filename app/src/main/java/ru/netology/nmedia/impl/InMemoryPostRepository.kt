@@ -26,8 +26,8 @@ class InMemoryPostRepository : PostRepository {
                 textPost = "Текст поста № ${index + 1}",
                 datePost = "21 мая в 18:36",
                 likes = 999,
-                share = 0,
-                views = 0,
+                share = 90,
+                views = 9,
                 likedByMe = false
             )
         }
