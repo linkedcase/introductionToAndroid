@@ -1,35 +1,55 @@
 package ru.netology.nmedia
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import ru.netology.nmedia.ViewModel.PostViewModel
+import ru.netology.nmedia.viewModel.PostViewModel
+import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
+import ru.netology.nmedia.util.hideKeyBoard
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel by viewModels<PostViewModel>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.data.observe(this) { post ->
-            binding.render(post)
+        val viewModel: PostViewModel by viewModels()
+        val adapter = PostsAdapter(viewModel)
+
+        binding.saveButton.setOnClickListener {
+            with(binding.contentEditText) {
+                val content = text.toString()
+
+                viewModel.onSaveButtonClicked(content)
+
+                clearFocus()
+                hideKeyBoard()
+            }
         }
 
-        binding.likes.setOnClickListener {
-            viewModel.onLikeClicKed()
+        binding.postsRecyclerView.adapter = adapter
+        viewModel.data.observe(this) { posts ->
+            adapter.submitList(posts)
         }
 
-        binding.share.setOnClickListener {
-            viewModel.isShared()
+        binding.editCancel.setOnClickListener {
+            val editedText = viewModel.onEditCancelClicked()
+            binding.contentEditText.setText(editedText)
         }
 
-        binding.views.setOnClickListener {
-            viewModel.isViewed()
+        viewModel.currentPost.observe(this) { currentPost ->
+            with(binding.contentEditText) {
+                val textPost = currentPost?.textPost
+                setText(textPost)
+                binding.group.visibility = View.GONE
+                if (textPost != null) {
+                    requestFocus()
+                    binding.group.visibility = View.VISIBLE
+                }
+            }
         }
     }
 }

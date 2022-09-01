@@ -8,4 +8,9 @@
     <string name="sum_likes">10</string>
     <string name="sum_share">5</string>
     <string name="sum_views">5</string>
+    <string name="remove">Remove</string>
+    <string name="post_text">Post Text</string>
+    <string name="menu_edit">Edit</string>
+    <string name="edit_cancel">Edit cancel</string>
+
 </resources>
