@@ -10,7 +10,12 @@
     <string name="sum_share">5</string>
     <string name="sum_views">5</string>
     <string name="remove">Удалить</string>
-    <string name="post_text">Создать новый пост</string>
+    <string name="post_text">Редактировать пост</string>
     <string name="menu_edit">Изменить</string>
     <string name="edit_cancel">Отменить редактирование</string>
+    <string name="chooser_share_post">Поделиться</string>
+    <string name="description_post_save">Сохранить пост</string>
+    <string name="add_post">Добавить пост</string>
+    <string name="video">Ссылка на видео</string>
+    <string name="play">Воспроизвести видео</string>
 </resources>

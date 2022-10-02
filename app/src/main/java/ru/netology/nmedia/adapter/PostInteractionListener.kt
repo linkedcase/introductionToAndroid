@@ -14,5 +14,7 @@ interface PostInteractionListener {
 
     fun onEditClicked(post: Post)
 
+    fun onPlayClicked(post: Post)
+
     fun onEditCancelClicked(): String
 }

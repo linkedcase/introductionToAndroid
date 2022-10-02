@@ -12,5 +12,11 @@
     <string name="post_text">Post Text</string>
     <string name="menu_edit">Edit</string>
     <string name="edit_cancel">Edit cancel</string>
+    <string name="chooser_share_post">Share Post</string>
+    <string name="description_post_save">Save Post</string>
+    <string name="add_post">Add post</string>
+    <string name="video">Video link</string>
+    <string name="play">Play video</string>
+
 
 </resources>
