@@ -9,7 +9,6 @@ import ru.netology.nmedia.activity.PostContentActivity
 import ru.netology.nmedia.viewModel.PostViewModel
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
-import ru.netology.nmedia.impl.InMemoryPostRepository
 
 class MainActivity : AppCompatActivity() {
 
