@@ -24,11 +24,12 @@ class InMemoryPostRepository : PostRepository {
                 idPost = index + 1L,
                 authorPost = "Нетология. Университет интернет-профессий будущего",
                 textPost = "Текст поста № ${index + 1}",
-                datePost = "21 мая в 18:36",
+                datePost = "03 октября в 17:38",
                 likes = 999,
                 share = 90,
                 views = 9,
-                likedByMe = false
+                likedByMe = false,
+                videoLink = if (index % 2 == 0) "https://www.youtube.com/watch?v=WhWc3b3KhnY" else ""
             )
         }
         data = MutableLiveData(initialPosts)
@@ -80,7 +81,7 @@ class InMemoryPostRepository : PostRepository {
     }
 
     private companion object {
-        const val GENERETED_POST_AMOUNT = 1000
+        const val GENERETED_POST_AMOUNT = 100
     }
 }
 

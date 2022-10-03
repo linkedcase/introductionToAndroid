@@ -9,43 +9,40 @@ import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.databinding.PostContentActivityBinding
 
 class PostContentActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         val binding = PostContentActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.edit.setText(intent.getStringExtra(Intent.EXTRA_TEXT))
         binding.edit.requestFocus()
         binding.ok.setOnClickListener {
-            onOkButtonClicked(binding.edit.text?.toString())
+            val intent = Intent()
+            val text = binding.edit.text
+            if (text.isNullOrBlank()) {
+                setResult(Activity.RESULT_CANCELED, intent)
+            } else {
+                val content = text.toString()
+                intent.putExtra(RESULT_KEY, content)
+                setResult(Activity.RESULT_OK, intent)
+            }
+            finish()
         }
     }
 
-    object ResultContract : ActivityResultContract<Unit, String?>() {
-        override fun createIntent(context: Context, input: Unit): Intent =
-            Intent(context, PostContentActivity::class.java) // Сформирровали явный интент для запуска активити
+    object ResultContract : ActivityResultContract<String?, String?>() {
+        override fun createIntent(context: Context, input: String?) =
+            Intent(context, PostContentActivity::class.java)
+                .putExtra(Intent.EXTRA_TEXT, input)
 
-        override fun parseResult(resultCode: Int, intent: Intent?): String? {
-            if (resultCode != Activity.RESULT_OK) return null
-            intent ?: return null
-
-            return intent.getStringExtra(RESULT_KEY)
-        }
+        override fun parseResult(resultCode: Int, intent: Intent?) =
+            if (resultCode == Activity.RESULT_OK) {
+                intent?.getStringExtra(RESULT_KEY)
+            } else null
     }
 
     private companion object {
         private const val RESULT_KEY = "postNewContent"
     }
-
-    private fun onOkButtonClicked(postContent: String?) {
-        if (postContent.isNullOrBlank()) {
-            setResult(Activity.RESULT_CANCELED, intent) // Сообщаем результат работы активити. В данном случае он неудачный
-        } else {
-            val resultIntent = Intent() // Результирующий интент
-            resultIntent.putExtra(RESULT_KEY, postContent) // положили в интент текст ,который ввел пользователь на экране
-            setResult(Activity.RESULT_OK, resultIntent) //здесь результат работы положительный и в интенте уже находится тект ,который ввел пользователь на экране
-        }
-        finish()
-    }
 }
-

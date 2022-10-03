@@ -74,37 +74,37 @@
         app:layout_constraintTop_toBottomOf="@id/headerBarrier"
         tools:ignore="SpUsage" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/videoLinkButton"
         android:layout_width="match_parent"
         android:layout_height="280dp"
-        android:contentDescription="@string/video"
-        android:visibility="visible"
+        android:layout_marginStart="16dp"
+        android:padding="@dimen/common_spacing"
         app:layout_constraintBottom_toTopOf="@id/textBarrier"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/youtube" />
 
-    <ImageButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/playButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:padding="@dimen/icon_button_min_size"
         android:contentDescription="@string/play"
-        android:visibility="visible"
-        app:layout_constraintTop_toTopOf="@id/videoLinkButton"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_play_circle_outline_48_dp"
         app:layout_constraintBottom_toBottomOf="@id/videoLinkButton"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_play_circle_outline_48_dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/videoLinkButton"
+        app:layout_constraintVertical_bias="0.450" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/groupVideo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         app:constraint_referenced_ids="videoLinkButton, playButton" />
 
     <androidx.constraintlayout.widget.Barrier

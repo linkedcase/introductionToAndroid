@@ -12,16 +12,15 @@
         android:layout_height="match_parent"
         android:background="@android:color/transparent"
         android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:autofillHints="string|reference"
-        tools:ignore="LabelFor" />
+        android:inputType="textMultiLine" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
-        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom" />
+        android:layout_gravity="bottom"
+        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+        android:contentDescription="@string/description_post_save"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/ok"

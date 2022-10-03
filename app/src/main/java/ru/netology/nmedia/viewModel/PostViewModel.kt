@@ -2,10 +2,10 @@ package ru.netology.nmedia.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.netology.nmedia.impl.InMemoryPostRepository
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.data.PostRepository
+import ru.netology.nmedia.impl.InMemoryPostRepository
 import ru.netology.nmedia.util.SingleLiveEvent
 
 class PostViewModel : ViewModel(), PostInteractionListener {
@@ -16,9 +16,13 @@ class PostViewModel : ViewModel(), PostInteractionListener {
 
     val sharePostContent = SingleLiveEvent<String>()
     val playVideoLink = SingleLiveEvent<String>()
-    //private val navigateToPostContentScreenEvent = SingleLiveEvent<Unit>()
+    val navigateToPostContentScreenEvent = SingleLiveEvent<Unit>()
 
     val currentPost = MutableLiveData<Post?>(null)
+
+    fun onAddClicked() {
+        navigateToPostContentScreenEvent.call()
+    }
 
     fun onSaveButtonClicked(content: String) {
 
