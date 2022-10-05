@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="@dimen/common_spacing">
 
     <ImageView
@@ -47,12 +47,13 @@
         app:layout_constraintTop_toBottomOf="@id/author"
         tools:ignore="SpUsage" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/options"
+        style="@style/Widget.AppTheme.OptionsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_options_24dp"
+        app:icon="@drawable/ic_options_button_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,6 +74,39 @@
         app:layout_constraintTop_toBottomOf="@id/headerBarrier"
         tools:ignore="SpUsage" />
 
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/videoLinkButton"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:layout_marginStart="16dp"
+        android:padding="@dimen/common_spacing"
+        app:layout_constraintBottom_toTopOf="@id/textBarrier"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/youtube" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/playButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/play"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_play_circle_outline_48_dp"
+        app:layout_constraintBottom_toBottomOf="@id/videoLinkButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/videoLinkButton"
+        app:layout_constraintVertical_bias="0.450" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="videoLinkButton, playButton" />
+
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/textBarrier"
         android:layout_width="0dp"
@@ -80,68 +114,34 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="content" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/likes"
+        style="@style/Widget.AppTheme.LikeCheckbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_like_24dp"
+        android:checkable="true"
+        app:icon="@drawable/ic_liked_24dp"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textBarrier" />
 
-    <TextView
-        android:id="@+id/sumLikes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:singleLine="true"
-        android:text="@string/sum_likes"
-        android:textSize="@dimen/common_spacing"
-        app:layout_constraintStart_toEndOf="@id/likes"
-        app:layout_constraintTop_toBottomOf="@id/textBarrier"
-        tools:ignore="SpUsage" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/share"
+        style="@style/Widget.AppTheme.ShareButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/common_spacing"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_share_24dp"
-        app:layout_constraintStart_toEndOf="@id/sumLikes"
+        app:icon="@drawable/ic_share_button_24dp"
+        app:layout_constraintStart_toEndOf="@id/likes"
         app:layout_constraintTop_toBottomOf="@id/textBarrier" />
 
-    <TextView
-        android:id="@+id/sumShare"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:singleLine="true"
-        android:text="@string/sum_share"
-        android:textSize="@dimen/common_spacing"
-        app:layout_constraintStart_toEndOf="@id/share"
-        app:layout_constraintTop_toBottomOf="@id/textBarrier"
-        tools:ignore="SpUsage" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/views"
+        style="@style/Widget.AppTheme.EyeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_eye_24dp"
-        app:layout_constraintEnd_toStartOf="@id/sumViews"
+        app:icon="@drawable/ic_eye_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintTop_toBottomOf="@id/textBarrier" />
 
-    <TextView
-        android:id="@+id/sumViews"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="8dp"
-        android:singleLine="true"
-        android:text="@string/sum_views"
-        android:textSize="@dimen/common_spacing"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textBarrier"
-        tools:ignore="RtlSymmetry,SpUsage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

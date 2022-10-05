@@ -1,5 +1,9 @@
-package ru.netology.nmedia
+package ru.netology.nmedia.dto
 
+import kotlinx.serialization.Serializable
+
+
+@Serializable
 data class Post(
     val idPost: Long,
     val authorPost: String,
@@ -8,5 +12,6 @@ data class Post(
     val likes: Int,
     val share: Int,
     val views: Int,
-    val likedByMe: Boolean = false
+    val likedByMe: Boolean = false,
+    var videoLink: String = ""
 )
