@@ -7,7 +7,7 @@ import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import ru.netology.nmedia.Post
+import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.PostListItemBinding
 import ru.netology.nmedia.impl.printQuantity

@@ -3,7 +3,7 @@ package ru.netology.nmedia.viewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import ru.netology.nmedia.Post
+import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.data.PostRepository
 import ru.netology.nmedia.impl.SharedPrefsPostRepository
@@ -19,7 +19,7 @@ class PostViewModel(
 
     val sharePostContent = SingleLiveEvent<String>()
     val playVideoLink = SingleLiveEvent<String>()
-    val navigateToPostContentScreenEvent = SingleLiveEvent<Unit>()
+    val navigateToPostContentScreenEvent = SingleLiveEvent<String>()
 
     val currentPost = MutableLiveData<Post?>(null)
 
@@ -59,6 +59,7 @@ class PostViewModel(
 
     override fun onEditClicked(post: Post) {
         currentPost.value = post
+        navigateToPostContentScreenEvent.value = post.textPost
     }
 
     override fun onPlayClicked(post: Post) {

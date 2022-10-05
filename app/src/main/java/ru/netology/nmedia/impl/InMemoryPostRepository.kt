@@ -2,24 +2,26 @@ package ru.netology.nmedia.impl
 
 import androidx.annotation.DrawableRes
 import androidx.lifecycle.MutableLiveData
-import ru.netology.nmedia.Post
+import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.R
 import ru.netology.nmedia.data.PostRepository
 
-class InMemoryPostRepository : PostRepository {
+object InMemoryPostRepository : PostRepository {
 
-    private var nextIdPost = GENERETED_POST_AMOUNT.toLong()
+    private const val GENERATED_POSTS_AMOUNT = 100
 
-    private var posts
-        get() = checkNotNull(data.value)
-        set(value) {
-            data.value = value
+    private var nextIdPost = GENERATED_POSTS_AMOUNT.toLong()
+
+    private val posts
+        get() = checkNotNull(data.value) {
+            "Data value should not be null"
         }
+//        set(value) {
+//            data.value = value
+//        }
 
-    override val data: MutableLiveData<List<Post>>
-
-    init {
-        val initialPosts = List(GENERETED_POST_AMOUNT) { index ->
+    override val data = MutableLiveData(
+        List(GENERATED_POSTS_AMOUNT) { index ->
             Post(
                 idPost = index + 1L,
                 authorPost = "Нетология. Университет интернет-профессий будущего",
@@ -32,12 +34,11 @@ class InMemoryPostRepository : PostRepository {
                 videoLink = if (index % 2 == 0) "https://www.youtube.com/watch?v=WhWc3b3KhnY" else ""
             )
         }
-        data = MutableLiveData(initialPosts)
-    }
+    )
 
     override fun like(idPost: Long) {
 
-        posts = posts.map { post ->
+        data.value = posts.map { post ->
             if (idPost == post.idPost) post.copy(
                 likedByMe = !post.likedByMe,
                 likes = if (post.likedByMe) post.likes - 1 else post.likes + 1
@@ -46,20 +47,20 @@ class InMemoryPostRepository : PostRepository {
     }
 
     override fun share(idPost: Long) {
-        posts = posts.map { post ->
+        data.value = posts.map { post ->
             if (idPost == post.idPost) post.copy(share = post.share + 1) else post
         }
     }
 
     override fun view(idPost: Long) {
 
-        posts = posts.map { post ->
+        data.value = posts.map { post ->
             if (idPost == post.idPost) post.copy(views = post.views + 1) else post
         }
     }
 
     override fun delete(idPost: Long) {
-        posts = posts.filter { post ->
+        data.value = posts.filter { post ->
             idPost != post.idPost
         }
     }
@@ -80,9 +81,9 @@ class InMemoryPostRepository : PostRepository {
         }
     }
 
-    private companion object {
-        const val GENERETED_POST_AMOUNT = 100
-    }
+override fun getById(idPost: Long): Post? {
+    return posts.find { it.idPost == idPost }
+}
 }
 
 @DrawableRes

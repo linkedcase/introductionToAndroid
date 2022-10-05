@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import ru.netology.nmedia.Post
+import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.data.PostRepository
 import kotlin.properties.Delegates
 
@@ -31,8 +31,8 @@ class SharedPrefsPostRepository(
         }
         set(value) {
             prefs.edit {
-                val serrializedPosts = Json.encodeToString(value)
-                putString(POSTS_PREFS_KEY, serrializedPosts)
+                val serializedPosts = Json.encodeToString(value)
+                putString(POSTS_PREFS_KEY, serializedPosts)
             }
             data.value = value
         }
@@ -78,6 +78,10 @@ class SharedPrefsPostRepository(
 
     override fun save(post: Post) {
         if (post.idPost == PostRepository.NEW_POST_ID) insert(post) else update(post)
+    }
+
+    override fun getById(idPost: Long): Post? {
+        TODO("Not yet implemented")
     }
 
     private fun insert(post: Post) {
